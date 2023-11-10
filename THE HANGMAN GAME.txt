@@ -1,0 +1,127 @@
+logo = ''' 
+ _                                             
+| |                                            
+| |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  
+| '_ \ / _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ 
+| | | | (_| | | | | (_| | | | | | | (_| | | | |
+|_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
+                    __/ |                      
+                   |___/    '''
+print(logo)
+print("\n\t\tGUESS THE WORD\n\tYOU WILL BE HANGED AFTER 5 GUESSES")
+Hangman = """
+  +----------+
+  |          |
+  |          |
+  o          |
+             |
+             |
+ ============= """
+print (Hangman)
+hangman=[ 
+         """
+
+           +----------+
+           |          |
+           |          |
+           o          |
+           |          |
+                      |
+          =============""" ,
+         """
+
+          +----------+
+          |          |
+          |          |
+          o          |
+          |\         |
+                     |
+         ============= """ ,
+         """
+
+           +----------+
+           |          |
+           |          |
+           o          |
+          /|\         |
+                      |
+          ============= """ ,
+         """
+
+          +----------+
+          |          |
+          |          |
+          o          |
+         /|\         |
+           \         |
+         ============= """ ,
+         """
+
+           +----------+
+           |          |
+           |          |
+           o          |
+          /|\         |
+          / \         |
+          ============= """ ,]
+
+word_list = ["aardvark", "baboon", "camel"]
+
+import random
+ran1 = random.randint(0,2)
+word = list(word_list[ran1])
+length = len(word)
+word_display = ""
+while length != 0 :
+  word_display += "_"
+  length -=1
+word_display = list(word_display)
+length = len(word)
+if (length <= 5) :
+  no_loops = 2
+  while no_loops != 0:
+    ran2 = random.randint(0,length-1)
+    word_display[ran2] = word[ran2]
+    no_loops -= 1
+  no_of_guessing_words = length - 2
+elif (length > 5) and (length <= 7) :
+  no_loops = 3
+  while no_loops != 0:
+      ran3 = random.randint(0,length-1)
+      word_display[ran3] = word[ran3]
+      no_loops -= 1
+  no_of_guessing_words = length - 3
+else:
+  no_loops = 4
+  while no_loops != 0:
+    ran4 = random.randint(0,length-1)
+    word_display[ran4] = word[ran4]
+    no_loops -= 1
+  no_of_guessing_words = length - 4
+
+print(word_display)
+lives = 5
+daigram=0
+for n in range(0,no_of_guessing_words+5):
+  if no_of_guessing_words != 0 and lives != 0:
+    wrong_word = True
+    guess = input("\nGUESS THE MISSING LETTER = ")
+    for n in range(0,length):
+      if word_display[n] == "_":
+        if guess == word[n]:
+          word_display[n] = guess
+          print(word_display)
+          no_of_guessing_words -= 1
+          wrong_word = False
+          break
+    if wrong_word != False:
+        print(f"\n\t\t ***YOU GUESSED THE WRONG LETTER***\n\tONLY {lives-1} TRIES LEFT")
+        print(hangman[daigram])
+        daigram += 1
+        lives -= 1
+
+
+if lives == 0 :
+    print(f"\n\t\t\t***YOU LOSE***\n\t\t:(YOU'R HANGED\n\tTHE WORD WAS {word}")
+else:
+    print("\n\t\t\t***YOU WIN***\n\t\t:)YOU'R FREED")
