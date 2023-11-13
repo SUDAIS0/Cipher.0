@@ -1,0 +1,53 @@
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+def encryption(shift , text):
+
+  text1 = list(text)
+  text2 = ""
+
+  for x in range(0,len(text1)):
+    for y in alphabet:
+      if (text1[x]== y ) and (text1[x] != " "):
+        index = alphabet.index(y)
+        index += shift
+        index %= 26
+        text2 += alphabet[index]
+        break
+      elif  (text1[x] == " "):
+        text2 += " "
+        break
+    
+  print(text2)
+  
+def dcryption(dshift , dtext):
+
+  dtext1 = list(dtext)
+  dtext2 = ""
+
+  for x in range(0,len(dtext1)):
+    for y in alphabet:
+      if (dtext1[x]== y ) and (dtext1[x] != " "):
+        dindex = alphabet.index(y)
+        dindex -= dshift
+        dindex %= 26
+        dtext2 += alphabet[dindex]
+        break
+      elif  (dtext1[x] == " "):
+        dtext2 += " "
+        break
+
+  print(dtext2)
+
+# MAIN 
+direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+
+if(direction == "encode"):
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number:\n"))
+    encryption(shift, text)
+elif(direction == "decode"):
+    dtext = input("Type your message:\n").lower()
+    dshift = int(input("Type the shift number:\n"))
+    dcryption(dshift , dtext)
+else:
+    print("\n\t\t\t\tERROE\n\t\tYou wrote the wrong parameters")
